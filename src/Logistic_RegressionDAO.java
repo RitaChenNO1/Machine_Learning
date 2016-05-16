@@ -63,7 +63,7 @@ public class Logistic_RegressionDAO {
         double labels[]=instance.labels;
         weights=new double[features[0].length];
         likelihood=new double[max_interation];
-        for(int iter=1;iter<=max_interation;iter++) {
+        for(int iter=0;iter<max_interation;iter++) {
             //get every rows data
             for (int i = 0; i < features.length; i++) {
                 //get the label,feature values of row i
@@ -77,14 +77,14 @@ public class Logistic_RegressionDAO {
                 }
                 //2. update the likelihood
                 likelihood[iter] += labeli*Math.log(predicti)+(1-labeli)*Math.log(1-predicti);
-                System.out.println("iteration: " +iter + " " + Arrays.toString(weights) + " Max likelihood: " + likelihood[iter]);
             }
+            System.out.println("iteration: " +iter + " " + Arrays.toString(weights) + " Max likelihood: " + likelihood[iter]);
         }
         //return this.weights;
     }
 
     public static void main(String args[]){
-        LR_Instance data=new LR_Instance("logistic_regression_data.txt");
+        LR_Instance data=new LR_Instance("src/logistic_regression_data.txt");
         Logistic_RegressionDAO lr=new Logistic_RegressionDAO();
         lr.train(3000,data,0.001);
     }
